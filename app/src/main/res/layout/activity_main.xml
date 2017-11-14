@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:design="http://schemas.android.com/apk/res-auto"
+    tools:context="com.group1.mymovie.MainActivity">
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></FrameLayout>
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottomTab"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorTrans"
+        design:menu="@menu/menu_navigation"
+        app:itemIconTint="@drawable/bottom_menu_selector"
+        app:itemTextColor="@drawable/bottom_menu_selector"
+        android:layout_alignParentBottom="true" />
+
+</RelativeLayout>

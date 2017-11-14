@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#191820</color>
+    <color name="colorTrans">#96191820</color>
+    <color name="colorSubPrimary">#201f25</color>
+    <color name="colorPrimaryDark">#191820</color>
+    <color name="colorAccent">#FB8C00</color>
+    <color name="colorLightGray">#dddddf</color>
+    <color name="colorYellow">#FFC400</color>
+    <color name="colorTransparent">#00000000</color>
+    <color name="colorTLGray">#96dddddf</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorGenre">#2e2d33</color>
+    <color name="accent">#ef5350</color>
+</resources>
