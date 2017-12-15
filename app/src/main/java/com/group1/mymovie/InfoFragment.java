@@ -46,7 +46,7 @@ public class InfoFragment extends Fragment {
         rvCast.setNestedScrollingEnabled(false);
         layoutManager2 = new LinearLayoutManager(getContext());
         layoutManager2.setOrientation(LinearLayoutManager.HORIZONTAL);
-        castAdapter = new CastAdapter(createListCast(), getContext(), Utilities.SMALL_WIDTH, (int)(Utilities.SMALL_WIDTH*1.5));
+        castAdapter = new CastAdapter(createListCast(), getContext(), Utilities.SMALL_WIDTH, (int)(Utilities.SMALL_WIDTH * Utilities.GOLDEN_RATIO));
         rvCast.setLayoutManager(layoutManager2);
         rvCast.setAdapter(castAdapter);
 

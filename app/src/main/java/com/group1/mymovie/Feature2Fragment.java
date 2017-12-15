@@ -14,12 +14,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageClickListener;
 import com.synnapps.carouselview.ImageListener;
 
 import java.util.ArrayList;
 
 /**
- * Created by LanAnh on 14/11/2017.
+ * Created by LanAnh on 08/11/2017.
  */
 
 public class Feature2Fragment extends Fragment {
@@ -37,38 +38,37 @@ public class Feature2Fragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_feature2, container, false);
+        View view = inflater.inflate(R.layout.fragment_feature, container, false);
         carouselView = (CarouselView) view.findViewById(R.id.carouselView);
         carouselView.setPageCount(createBannerList().size());
         carouselView.setImageListener(imageListener);
-        carouselView.setOnClickListener(new View.OnClickListener() {
+        carouselView.setImageClickListener(new ImageClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(int position) {
                 Intent intent = new Intent(getContext(), DetailActivity.class);
                 startActivity(intent);
             }
         });
         rvPopularity = (RecyclerView) view.findViewById(R.id.rvPopularity);
-        layoutPopularity = new LinearLayoutManager(getContext());
-        layoutPopularity.setOrientation(LinearLayoutManager.HORIZONTAL);
-        adapterPopularity = new MovieAdapter(createPopularityList(), getContext(), Utilities.LANDSCAPE_WIDTH, (float)(Utilities.LANDSCAPE_WIDTH*0.6));
+        layoutPopularity = new GridLayoutManager(getContext(), 2);
+        adapterPopularity = new MovieAdapter(createPopularityList(), getContext(), Utilities.LANDSCAPE_WIDTH, (float)(Utilities.LANDSCAPE_WIDTH/Utilities.GOLDEN_RATIO));
         rvPopularity.setLayoutManager(layoutPopularity);
         rvPopularity.setAdapter(adapterPopularity);
         rvMost = (RecyclerView) view.findViewById(R.id.rvMost);
         gridMost = new GridLayoutManager(getContext(), 2);
-        adapterMost = new MovieAdapter(createMovieList(), getContext(), Utilities.LANDSCAPE_WIDTH, (float)(Utilities.LANDSCAPE_WIDTH*0.6));
+        adapterMost = new MovieAdapter(createMovieList(), getContext(), Utilities.LANDSCAPE_WIDTH, (float)(Utilities.LANDSCAPE_WIDTH/Utilities.GOLDEN_RATIO));
         rvMost.setLayoutManager(gridMost);
         rvMost.setAdapter(adapterMost);
         rvRecommend = (RecyclerView) view.findViewById(R.id.rvRecommend);
         gridRecommend = new GridLayoutManager(getContext(), 2);
-        adapterRecommend = new MovieAdapter(createRecommendList(), getContext(), Utilities.LANDSCAPE_WIDTH, (float)(Utilities.LANDSCAPE_WIDTH*0.6));
+        adapterRecommend = new MovieAdapter(createRecommendList(), getContext(), Utilities.LANDSCAPE_WIDTH, (float)(Utilities.LANDSCAPE_WIDTH/Utilities.GOLDEN_RATIO));
         rvRecommend.setLayoutManager(gridRecommend);
         rvRecommend.setAdapter(adapterRecommend);
         txtMorePopularity = (TextView) view.findViewById(R.id.txtMorePopularity);
         txtMorePopularity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), List2Activity.class);
+                Intent intent = new Intent(getContext(), ListActivity.class);
                 intent.putExtra("title", "Popularity");
                 startActivity(intent);
             }
@@ -77,7 +77,7 @@ public class Feature2Fragment extends Fragment {
         txtMoreMost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), List2Activity.class);
+                Intent intent = new Intent(getContext(), ListActivity.class);
                 intent.putExtra("title", "Most watched Movies");
                 startActivity(intent);
             }
@@ -86,7 +86,7 @@ public class Feature2Fragment extends Fragment {
         txtMoreRecommend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), List2Activity.class);
+                Intent intent = new Intent(getContext(), ListActivity.class);
                 intent.putExtra("title", "Recommend");
                 startActivity(intent);
             }
@@ -101,29 +101,29 @@ public class Feature2Fragment extends Fragment {
     };
     ArrayList<Integer> createBannerList(){
         ArrayList<Integer> list = new ArrayList<>();
-        list.add(R.drawable.banner_big_hero_6);
-        list.add(R.drawable.banner_koe_no_katachi);
-        list.add(R.drawable.banner_your_name);
         list.add(R.drawable.banner_garden_of_the_word);
         list.add(R.drawable.banner_gintama);
+        list.add(R.drawable.banner_koe_no_katachi);
+        list.add(R.drawable.banner_your_name);
+        list.add(R.drawable.banner_big_hero_6);
         return list;
     }
     public ArrayList<Movie> createPopularityList(){
         ArrayList<Movie> list = new ArrayList<>();
-        list.add(new Movie(R.drawable.banner_big_hero_6, "Big Hero 6", (float)7.5, "Cartoon, Family"));
-        list.add(new Movie(R.drawable.banner_koe_no_katachi, "Koe no katachi", (float)7.1, "Anime, Romance"));
-        list.add(new Movie(R.drawable.banner_goblin, "Goblin (2017)", (float)8.8, "Melodrama, Romance"));
         list.add(new Movie(R.drawable.banner_your_name, "Kimi no na wa", (float)8.5, "Romance, Anime"));
         list.add(new Movie(R.drawable.banner_gintama, "Gintama (2017)", (float)8.0, "Action, Comedy"));
-        list.add(new Movie(R.drawable.banner_descendants_of_the_sun, "Descendants", (float)6.6, "Melodrama, Action"));
+        list.add(new Movie(R.drawable.banner_goblin, "Goblin (2017)", (float)8.8, "Melodrama, Romance"));
+        list.add(new Movie(R.drawable.banner_big_hero_6, "Big Hero 6", (float)7.5, "Cartoon, Family"));
+//        list.add(new Movie(R.drawable.banner_koe_no_katachi, "Koe no katachi", (float)7.1, "Anime, Romance"));
+//        list.add(new Movie(R.drawable.banner_descendants_of_the_sun, "Descendants", (float)6.6, "Melodrama, Action"));
         return list;
     }
 
     public ArrayList<Movie> createMovieList(){
         ArrayList<Movie>list = new ArrayList<>();
+        list.add(new Movie(R.drawable.banner_koe_no_katachi, "Koe no katachi", (float)7.1, "Anime, Romance"));
         list.add(new Movie(R.drawable.banner_big_hero_6, "Big Hero 6", (float)7.5, "Cartoon, Family"));
         list.add(new Movie(R.drawable.banner_gintama, "Gintama (2017)", (float)8.0, "Action, Comedy"));
-        list.add(new Movie(R.drawable.banner_koe_no_katachi, "Koe no katachi", (float)7.1, "Anime, Romance"));
         list.add(new Movie(R.drawable.banner_your_name, "Kimi no na wa", (float)8.5, "Romance, Anime"));
         return list;
     }

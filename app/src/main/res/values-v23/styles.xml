@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Dialog" parent="Theme.AppCompat.DayNight.Dialog">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/colorAccent</item>
+        <item name="android:textColorAlertDialogListItem">@color/colorAccent</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+</resources>

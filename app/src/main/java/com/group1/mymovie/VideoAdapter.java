@@ -38,7 +38,7 @@ public class VideoAdapter extends RecyclerView.Adapter<VideoAdapter.VideoHolder>
         holder.btnPlay.setImageResource(R.drawable.btn_play_selector);
         Picasso.with(mContext).load(R.drawable.banner_your_name)
                 .placeholder(R.drawable.default_landscape)
-                .resize(Utilities.LANDSCAPE_WIDTH, (int)(Utilities.LANDSCAPE_WIDTH * 0.7))
+                .resize(Utilities.LANDSCAPE_WIDTH, (int)(Utilities.LANDSCAPE_WIDTH / Utilities.GOLDEN_RATIO))
         .into(holder.imgBanner);
     }
 

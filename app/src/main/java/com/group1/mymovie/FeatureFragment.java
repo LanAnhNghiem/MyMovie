@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.synnapps.carouselview.CarouselView;
+import com.synnapps.carouselview.ImageClickListener;
 import com.synnapps.carouselview.ImageListener;
 
 import java.util.ArrayList;
@@ -41,27 +42,26 @@ public class FeatureFragment extends Fragment {
         carouselView = (CarouselView) view.findViewById(R.id.carouselView);
         carouselView.setPageCount(createBannerList().size());
         carouselView.setImageListener(imageListener);
-        carouselView.setOnClickListener(new View.OnClickListener() {
+        carouselView.setImageClickListener(new ImageClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(int position) {
                 Intent intent = new Intent(getContext(), DetailActivity.class);
                 startActivity(intent);
             }
         });
         rvPopularity = (RecyclerView) view.findViewById(R.id.rvPopularity);
-        layoutPopularity = new LinearLayoutManager(getContext());
-        layoutPopularity.setOrientation(LinearLayoutManager.HORIZONTAL);
-        adapterPopularity = new MovieAdapter(createPopularityList(), getContext(), Utilities.LANDSCAPE_WIDTH, (float)(Utilities.LANDSCAPE_WIDTH*0.6));
+        layoutPopularity = new GridLayoutManager(getContext(), 2);
+        adapterPopularity = new MovieAdapter(createPopularityList(), getContext(), Utilities.LANDSCAPE_WIDTH, (float)(Utilities.LANDSCAPE_WIDTH/Utilities.GOLDEN_RATIO));
         rvPopularity.setLayoutManager(layoutPopularity);
         rvPopularity.setAdapter(adapterPopularity);
         rvMost = (RecyclerView) view.findViewById(R.id.rvMost);
         gridMost = new GridLayoutManager(getContext(), 2);
-        adapterMost = new MovieAdapter(createMovieList(), getContext(), Utilities.LANDSCAPE_WIDTH, (float)(Utilities.LANDSCAPE_WIDTH*0.6));
+        adapterMost = new MovieAdapter(createMovieList(), getContext(), Utilities.LANDSCAPE_WIDTH, (float)(Utilities.LANDSCAPE_WIDTH/Utilities.GOLDEN_RATIO));
         rvMost.setLayoutManager(gridMost);
         rvMost.setAdapter(adapterMost);
         rvRecommend = (RecyclerView) view.findViewById(R.id.rvRecommend);
         gridRecommend = new GridLayoutManager(getContext(), 2);
-        adapterRecommend = new MovieAdapter(createRecommendList(), getContext(), Utilities.LANDSCAPE_WIDTH, (float)(Utilities.LANDSCAPE_WIDTH*0.6));
+        adapterRecommend = new MovieAdapter(createRecommendList(), getContext(), Utilities.LANDSCAPE_WIDTH, (float)(Utilities.LANDSCAPE_WIDTH/Utilities.GOLDEN_RATIO));
         rvRecommend.setLayoutManager(gridRecommend);
         rvRecommend.setAdapter(adapterRecommend);
         txtMorePopularity = (TextView) view.findViewById(R.id.txtMorePopularity);
@@ -114,8 +114,8 @@ public class FeatureFragment extends Fragment {
         list.add(new Movie(R.drawable.banner_gintama, "Gintama (2017)", (float)8.0, "Action, Comedy"));
         list.add(new Movie(R.drawable.banner_goblin, "Goblin (2017)", (float)8.8, "Melodrama, Romance"));
         list.add(new Movie(R.drawable.banner_big_hero_6, "Big Hero 6", (float)7.5, "Cartoon, Family"));
-        list.add(new Movie(R.drawable.banner_koe_no_katachi, "Koe no katachi", (float)7.1, "Anime, Romance"));
-        list.add(new Movie(R.drawable.banner_descendants_of_the_sun, "Descendants", (float)6.6, "Melodrama, Action"));
+//        list.add(new Movie(R.drawable.banner_koe_no_katachi, "Koe no katachi", (float)7.1, "Anime, Romance"));
+//        list.add(new Movie(R.drawable.banner_descendants_of_the_sun, "Descendants", (float)6.6, "Melodrama, Action"));
         return list;
     }
 

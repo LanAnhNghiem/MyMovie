@@ -60,8 +60,8 @@ public class DetailActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 final CharSequence[] items = {"Facebook", "Messenger", "Twitter"};
-                AlertDialog.Builder builder = new AlertDialog.Builder(DetailActivity.this);
-                builder.setTitle("Choose subtitle language")
+                AlertDialog.Builder builder = new AlertDialog.Builder(DetailActivity.this, R.style.Dialog);
+                builder.setTitle("Share with")
                         .setItems(items, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // The 'which' argument contains the index position
@@ -76,8 +76,8 @@ public class DetailActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 final CharSequence[] items = {"English", "Vietnamese", "Japanese"};
-                AlertDialog.Builder builder = new AlertDialog.Builder(DetailActivity.this);
-                builder.setTitle("Share with")
+                AlertDialog.Builder builder = new AlertDialog.Builder(DetailActivity.this, R.style.Dialog);
+                builder.setTitle("Choose subtitle language")
                         .setItems(items, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // The 'which' argument contains the index position

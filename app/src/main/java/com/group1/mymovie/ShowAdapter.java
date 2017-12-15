@@ -43,7 +43,7 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ShowHolder> {
         }
         Picasso.with(context).load(list.get(position))
                 .placeholder(R.drawable.default_landscape)
-                .resize(Utilities.LANDSCAPE_WIDTH + 40, (int)((Utilities.LANDSCAPE_WIDTH + 40)*0.6)).into(holder.imgBanner);
+                .resize(Utilities.LANDSCAPE_WIDTH + 40, (int)((Utilities.LANDSCAPE_WIDTH + 40)/ Utilities.GOLDEN_RATIO)).into(holder.imgBanner);
     }
 
     @Override

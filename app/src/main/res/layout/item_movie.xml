@@ -30,7 +30,7 @@
         <android.support.v7.widget.CardView
             android:id="@+id/cvRating"
             android:layout_width="50dp"
-            android:layout_height="30dp"
+            android:layout_height="30.9dp"
             android:layout_gravity="right"
             app:cardBackgroundColor="@color/colorYellow"
             app:cardCornerRadius="8dp"
@@ -56,6 +56,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center_vertical|center_horizontal"
                     tool:text="8.0"
+                    android:textSize="13dp"
                     android:textColor="#ffffff"
                     android:gravity="center_vertical|center_horizontal"
                     android:layout_weight="1.2"/>
@@ -73,9 +74,8 @@
             android:layout_height="wrap_content"
             tool:text="Kimi no na wa"
             android:inputType="textMultiLine"
-            android:textSize="18sp"
             android:textColor="@color/colorAccent"
-            android:layout_marginBottom="5dp"/>
+            android:layout_marginBottom="3dp"/>
         <TextView
             android:id="@+id/txtGenre"
             android:layout_width="wrap_content"
