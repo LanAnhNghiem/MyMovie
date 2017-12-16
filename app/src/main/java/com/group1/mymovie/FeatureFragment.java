@@ -1,9 +1,11 @@
 package com.group1.mymovie;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,6 +26,9 @@ import java.util.ArrayList;
  */
 
 public class FeatureFragment extends Fragment {
+
+    private static String TAG = FeatureFragment.class.getSimpleName();
+    OnScrollingListener scrollingListener;
     CarouselView carouselView;
     RecyclerView rvPopularity;
     MovieAdapter adapterPopularity;
@@ -35,12 +40,26 @@ public class FeatureFragment extends Fragment {
     MovieAdapter adapterRecommend;
     GridLayoutManager gridRecommend;
     TextView txtMorePopularity, txtMoreMost, txtMoreRecommend;
+    NestedScrollView nestedScrollView;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_feature, container, false);
+        nestedScrollView = view.findViewById(R.id.nestedScroll);
+        nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                if (scrollY > oldScrollY) {
+                    onScrolling(false);
+                }
+                if (scrollY < oldScrollY) {
+                    onScrolling(true);
+                }
+            }
+        });
         carouselView = (CarouselView) view.findViewById(R.id.carouselView);
         carouselView.setPageCount(createBannerList().size());
+        carouselView.setMinimumHeight((int)(Utilities.SCREEN_WIDTH / Utilities.GOLDEN_RATIO));
         carouselView.setImageListener(imageListener);
         carouselView.setImageClickListener(new ImageClickListener() {
             @Override
@@ -99,6 +118,17 @@ public class FeatureFragment extends Fragment {
             imageView.setImageResource(createBannerList().get(position));
         }
     };
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        scrollingListener = (OnScrollingListener)context;
+    }
+
+    public void onScrolling(boolean isUp){
+        scrollingListener.onScrollingListener(isUp);
+    }
+
     ArrayList<Integer> createBannerList(){
         ArrayList<Integer> list = new ArrayList<>();
         list.add(R.drawable.banner_garden_of_the_word);
@@ -136,4 +166,5 @@ public class FeatureFragment extends Fragment {
         list.add(new Movie(R.drawable.banner_gintama, "Gintama (2017)", (float)8.0, "Action, Comedy"));
         return list;
     }
+
 }

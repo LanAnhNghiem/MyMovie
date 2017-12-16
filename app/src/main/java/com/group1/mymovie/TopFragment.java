@@ -1,7 +1,10 @@
 package com.group1.mymovie;
 
+import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +22,8 @@ public class TopFragment extends Fragment {
     RecyclerView rvList;
     GridLayoutManager gridLayout;
     PortraitAdapter adapter;
+    OnScrollingListener scrollingListener;
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -28,7 +33,29 @@ public class TopFragment extends Fragment {
         adapter = new PortraitAdapter(createMovieList(), getContext(), false);
         rvList.setLayoutManager(gridLayout);
         rvList.setAdapter(adapter);
+        rvList.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0) {
+                    // Scrolling up
+                    onScrolling(false);
+                } else {
+                    // Scrolling down
+                    onScrolling(true);
+                }
+            }
+        });
         return view;
+    }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        scrollingListener = (OnScrollingListener)context;
+    }
+
+    public void onScrolling(boolean isUp){
+        scrollingListener.onScrollingListener(isUp);
     }
     public ArrayList<Movie> createMovieList(){
         ArrayList<Movie>list = new ArrayList<>();

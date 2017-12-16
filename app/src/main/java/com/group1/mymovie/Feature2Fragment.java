@@ -1,9 +1,11 @@
 package com.group1.mymovie;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,6 +26,7 @@ import java.util.ArrayList;
  */
 
 public class Feature2Fragment extends Fragment {
+    OnScrollingListener scrollingListener;
     CarouselView carouselView;
     RecyclerView rvPopularity;
     MovieAdapter adapterPopularity;
@@ -35,13 +38,27 @@ public class Feature2Fragment extends Fragment {
     MovieAdapter adapterRecommend;
     GridLayoutManager gridRecommend;
     TextView txtMorePopularity, txtMoreMost, txtMoreRecommend;
+    NestedScrollView nestedScrollView;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_feature, container, false);
+        View view = inflater.inflate(R.layout.fragment_feature2, container, false);
+        nestedScrollView = view.findViewById(R.id.nestedScroll);
+        nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                if (scrollY > oldScrollY) {
+                    onScrolling(false);
+                }
+                if (scrollY < oldScrollY) {
+                    onScrolling(true);
+                }
+            }
+        });
         carouselView = (CarouselView) view.findViewById(R.id.carouselView);
         carouselView.setPageCount(createBannerList().size());
         carouselView.setImageListener(imageListener);
+        carouselView.setMinimumHeight((int)(Utilities.SCREEN_WIDTH / Utilities.GOLDEN_RATIO));
         carouselView.setImageClickListener(new ImageClickListener() {
             @Override
             public void onClick(int position) {
@@ -68,7 +85,7 @@ public class Feature2Fragment extends Fragment {
         txtMorePopularity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), ListActivity.class);
+                Intent intent = new Intent(getContext(), List2Activity.class);
                 intent.putExtra("title", "Popularity");
                 startActivity(intent);
             }
@@ -77,8 +94,8 @@ public class Feature2Fragment extends Fragment {
         txtMoreMost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), ListActivity.class);
-                intent.putExtra("title", "Most watched Movies");
+                Intent intent = new Intent(getContext(), List2Activity.class);
+                intent.putExtra("title", "Most watched TV shows");
                 startActivity(intent);
             }
         });
@@ -86,7 +103,7 @@ public class Feature2Fragment extends Fragment {
         txtMoreRecommend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getContext(), ListActivity.class);
+                Intent intent = new Intent(getContext(), List2Activity.class);
                 intent.putExtra("title", "Recommend");
                 startActivity(intent);
             }
@@ -99,6 +116,15 @@ public class Feature2Fragment extends Fragment {
             imageView.setImageResource(createBannerList().get(position));
         }
     };
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        scrollingListener = (OnScrollingListener)context;
+    }
+
+    public void onScrolling(boolean isUp){
+        scrollingListener.onScrollingListener(isUp);
+    }
     ArrayList<Integer> createBannerList(){
         ArrayList<Integer> list = new ArrayList<>();
         list.add(R.drawable.banner_garden_of_the_word);

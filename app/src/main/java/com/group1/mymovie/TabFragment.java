@@ -1,5 +1,6 @@
 package com.group1.mymovie;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -22,6 +23,7 @@ public class TabFragment extends Fragment {
     GridLayoutManager gridLayout;
     PortraitAdapter adapter;
     Spinner spinner;
+    OnScrollingListener scrollingListener;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -31,11 +33,33 @@ public class TabFragment extends Fragment {
         adapter = new PortraitAdapter(createMovieList(), getContext(), true);
         rvList.setLayoutManager(gridLayout);
         rvList.setAdapter(adapter);
+        rvList.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0) {
+                    // Scrolling up
+                    onScrolling(false);
+                } else {
+                    // Scrolling down
+                    onScrolling(true);
+                }
+            }
+        });
         spinner = (Spinner) view.findViewById(R.id.spinner);
         ArrayAdapter adapter = ArrayAdapter.createFromResource(getActivity(), R.array.sort, R.layout.item_spinner);
         adapter.setDropDownViewResource(R.layout.item_spinner_dropdown);
         spinner.setAdapter(adapter);
         return view;
+    }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        scrollingListener = (OnScrollingListener)context;
+    }
+
+    public void onScrolling(boolean isUp){
+        scrollingListener.onScrollingListener(isUp);
     }
     public ArrayList<Movie> createMovieList(){
         ArrayList<Movie>list = new ArrayList<>();

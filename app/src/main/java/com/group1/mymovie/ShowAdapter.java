@@ -18,11 +18,11 @@ import java.util.ArrayList;
  */
 
 public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ShowHolder> {
-    ArrayList<Integer> list = new ArrayList<>();
+    ArrayList<Movie> list = new ArrayList<>();
     Context context;
     boolean isPaddingTop =false;
 
-    public ShowAdapter(ArrayList<Integer> list, Context context, boolean isPaddingTop) {
+    public ShowAdapter(ArrayList<Movie> list, Context context, boolean isPaddingTop) {
         this.list = list;
         this.context = context;
         this.isPaddingTop = isPaddingTop;
@@ -41,9 +41,10 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ShowHolder> {
         {
             holder.paddingTop.setVisibility(View.VISIBLE);
         }
-        Picasso.with(context).load(list.get(position))
+        Picasso.with(context).load(list.get(position).getPoster())
                 .placeholder(R.drawable.default_landscape)
                 .resize(Utilities.LANDSCAPE_WIDTH + 40, (int)((Utilities.LANDSCAPE_WIDTH + 40)/ Utilities.GOLDEN_RATIO)).into(holder.imgBanner);
+        holder.txtShowName.setText(list.get(position).getName());
     }
 
     @Override
@@ -53,10 +54,12 @@ public class ShowAdapter extends RecyclerView.Adapter<ShowAdapter.ShowHolder> {
 
     public class ShowHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView imgBanner;
+        TextView txtShowName;
         TextView paddingTop;
         public ShowHolder(View itemView) {
             super(itemView);
             imgBanner = (ImageView)itemView.findViewById(R.id.imgBanner);
+            txtShowName = itemView.findViewById(R.id.txtShowName);
             paddingTop = (TextView) itemView.findViewById(R.id.paddingTop);
             itemView.setOnClickListener(this);
         }

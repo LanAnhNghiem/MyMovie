@@ -27,8 +27,8 @@ import static com.group1.mymovie.R.id.viewPager;
 
 public class MoviesFragment extends Fragment {
     private Toolbar toolbar;
-    ViewPager mViewPager;
     TabLayout mTabLayout;
+    ViewPager mViewPager;
     ViewPagerAdapter mAdapter;
     @Nullable
     @Override
@@ -41,6 +41,7 @@ public class MoviesFragment extends Fragment {
         mTabLayout.setupWithViewPager(mViewPager);
         mAdapter = new ViewPagerAdapter(getChildFragmentManager());
         setupViewPager(mViewPager);
+
         return view;
     }
 
@@ -65,5 +66,6 @@ public class MoviesFragment extends Fragment {
         mAdapter.addFragment(new TabFragment(), "Cartoon");
         viewPager.setAdapter(mAdapter);
     }
+
 
 }

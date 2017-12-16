@@ -43,14 +43,23 @@ public class List2Activity extends AppCompatActivity {
         rvList.setAdapter(adapter);
     }
 
-    public ArrayList<Integer> createMovieList(){
-        ArrayList<Integer>list = new ArrayList<>();
-        list.add(R.drawable.banner_gintama);
-        list.add(R.drawable.banner_your_name);
-        list.add(R.drawable.banner_descendants_of_the_sun);
-        list.add(R.drawable.banner_goblin);
-        list.add(R.drawable.banner_koe_no_katachi);
-        list.add(R.drawable.banner_big_hero_6);
+//    public ArrayList<Integer> createMovieList(){
+//        ArrayList<Integer>list = new ArrayList<>();
+//        list.add(R.drawable.banner_gintama);
+//        list.add(R.drawable.banner_your_name);
+//        list.add(R.drawable.banner_descendants_of_the_sun);
+//        list.add(R.drawable.banner_goblin);
+//        list.add(R.drawable.banner_koe_no_katachi);
+//        list.add(R.drawable.banner_big_hero_6);
+//        return list;
+//    }
+    public ArrayList<Movie> createMovieList(){
+        ArrayList<Movie>list = new ArrayList<>();
+        list.add(new Movie(R.drawable.banner_koe_no_katachi, "Koe no katachi", (float)7.1, "Anime, Romance"));
+        list.add(new Movie(R.drawable.banner_big_hero_6, "Big Hero 6", (float)7.5, "Cartoon, Family"));
+        list.add(new Movie(R.drawable.banner_gintama, "Gintama (2017)", (float)8.0, "Action, Comedy"));
+        list.add(new Movie(R.drawable.banner_your_name, "Kimi no na wa", (float)8.5, "Romance, Anime"));
+        list.add(new Movie(R.drawable.banner_goblin, "Goblin (2017)", (float)8.8, "Melodrama, Romance"));
         return list;
     }
 }

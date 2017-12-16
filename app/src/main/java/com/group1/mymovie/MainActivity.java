@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MenuItemCompat;
@@ -16,9 +17,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
-    private BottomNavigationView bottomTab;
+public class MainActivity extends AppCompatActivity implements OnScrollingListener{
+    private static final String TAG = MainActivity.class.getSimpleName();
+    public BottomNavigationView bottomTab;
     private Toolbar toolbar;
+    //int y, initialY, scrollingY, scrolledY;
+    boolean isVisible = true;
+    float initialX, initialY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         bottomTab = (BottomNavigationView) findViewById(R.id.bottomTab);
+        CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) bottomTab.getLayoutParams();
+        layoutParams.setBehavior(new BottomNavigationViewBehavior());
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.container, new MoviesFragment()).commit();
@@ -63,5 +70,16 @@ public class MainActivity extends AppCompatActivity {
         ComponentName componentName = new ComponentName(getApplicationContext(), MainActivity.class);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName));
         return true;
+    }
+
+    @Override
+    public void onScrollingListener(boolean isUp) {
+        if(isUp){
+            bottomTab.clearAnimation();
+            bottomTab.animate().translationY(0).setDuration(200);
+        }else{
+            bottomTab.clearAnimation();
+            bottomTab.animate().translationY(168).setDuration(200);
+        }
     }
 }

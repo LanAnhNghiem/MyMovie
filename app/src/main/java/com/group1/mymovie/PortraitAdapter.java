@@ -41,7 +41,7 @@ public class PortraitAdapter extends RecyclerView.Adapter<PortraitAdapter.Portra
         }
         Picasso.with(mContext).load(mList.get(i).getPoster())
                 .placeholder(R.drawable.default_portrait)
-                .resize(Utilities.LANDSCAPE_WIDTH, (int)(Utilities.LANDSCAPE_WIDTH*Utilities.GOLDEN_RATIO))
+                .resize(Utilities.LANDSCAPE_WIDTH, (int)((Utilities.PORTRAIT_WIDTH-10)*Utilities.GOLDEN_RATIO))
                 .into(holder.imgPoster);
         holder.txtName.setText(mList.get(i).getName());
         holder.txtGenre.setText(mList.get(i).getGenre());
