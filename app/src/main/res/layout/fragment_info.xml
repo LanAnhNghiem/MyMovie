@@ -17,7 +17,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Movie's name"
+                android:text="Kimi no na wa"
                 android:textColor="@color/colorAccent"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -31,15 +31,16 @@
                 app:cardBackgroundColor="@color/colorAccent"
                 app:cardCornerRadius="8dp"
                 android:layout_alignParentTop="true"
-                android:layout_toStartOf="@+id/cvRating">
+                android:layout_toStartOf="@+id/cvDownload">
                 <ImageView
+                    android:id="@+id/imgStar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
                     android:src="@drawable/ic_star" />
             </android.support.v7.widget.CardView>
             <android.support.v7.widget.CardView
-                android:id="@+id/cvRating"
+                android:id="@+id/cvDownload"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="end"
@@ -48,6 +49,7 @@
                 app:cardCornerRadius="8dp"
                 android:layout_alignParentRight="true">
                 <ImageView
+                    android:id="@+id/imgDownload"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center_horizontal|center_vertical"

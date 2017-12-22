@@ -42,6 +42,7 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.CastHolder> {
                 .resize(mWidth,mHeight)
                 .into(castHolder.imgPhoto);
         castHolder.txtName.setText(mCastList.get(i).getName());
+        castHolder.txtName.setWidth(mWidth);
         castHolder.txtCharacter.setText(mCastList.get(i).getCharacter());
     }
 
