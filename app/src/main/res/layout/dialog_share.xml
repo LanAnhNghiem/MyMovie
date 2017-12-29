@@ -5,10 +5,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimary">
     <TextView
-        android:id="@+id/txtMovie"
+        android:id="@+id/txtFacebook"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Movie"
+        android:text="Facebook"
         android:textSize="17sp"
         android:textColor="@color/colorWhite"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,15 +17,27 @@
         android:paddingStart="30dp"
         android:paddingTop="30dp" />
     <TextView
-        android:id="@+id/txtTVShow"
+        android:id="@+id/txtMess"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TV show"
+        android:text="Messenger"
         android:textSize="17sp"
         android:textColor="@color/colorWhite"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtMovie"
+        app:layout_constraintTop_toBottomOf="@+id/txtFacebook"
+        android:paddingStart="30dp"
+        android:paddingTop="30dp" />
+    <TextView
+        android:id="@+id/txtTwitter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Twitter"
+        android:textSize="17sp"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtMess"
         android:paddingStart="30dp"
         android:paddingTop="30dp"
         android:paddingBottom="30dp"/>

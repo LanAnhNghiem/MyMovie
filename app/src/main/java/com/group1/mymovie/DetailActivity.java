@@ -1,6 +1,5 @@
 package com.group1.mymovie;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -8,8 +7,10 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import tcking.github.com.giraffeplayer2.VideoView;
 
@@ -60,14 +61,34 @@ public class DetailActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 final CharSequence[] items = {"Facebook", "Messenger", "Twitter"};
-                AlertDialog.Builder builder = new AlertDialog.Builder(DetailActivity.this, R.style.Dialog);
-                builder.setTitle("Share with")
-                        .setItems(items, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                // The 'which' argument contains the index position
-                                // of the selected item
-                            }
-                        }).create().show();
+                LayoutInflater layout = LayoutInflater.from(DetailActivity.this);
+                final View dialogview = layout.inflate(R.layout.dialog_share, null);
+                final TextView txtFacebook = dialogview.findViewById(R.id.txtFacebook);
+                final TextView txtMessenger = dialogview.findViewById(R.id.txtMess);
+                final TextView txtTwitter = dialogview.findViewById(R.id.txtTwitter);
+                AlertDialog.Builder builder = new AlertDialog.Builder(DetailActivity.this, R.style.MyDialogTheme);
+                builder.setTitle("Share with").setView(dialogview);
+                final AlertDialog dialog = builder.create();
+                txtFacebook.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+                txtMessenger.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+                txtTwitter.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
+
             }
         });
         btnSubtitle = (ImageView) findViewById(R.id.btnSubtitle);
@@ -76,14 +97,33 @@ public class DetailActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 final CharSequence[] items = {"English", "Vietnamese", "Japanese"};
-                AlertDialog.Builder builder = new AlertDialog.Builder(DetailActivity.this, R.style.Dialog);
-                builder.setTitle("Choose subtitle language")
-                        .setItems(items, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                // The 'which' argument contains the index position
-                                // of the selected item
-                            }
-                        }).create().show();
+                LayoutInflater layout = LayoutInflater.from(DetailActivity.this);
+                final View dialogview = layout.inflate(R.layout.dialog_language, null);
+                final TextView txtEnglish = dialogview.findViewById(R.id.txtEnglish);
+                final TextView txtVietnamese = dialogview.findViewById(R.id.txtVietnamese);
+                final TextView txtJapanese = dialogview.findViewById(R.id.txtJapanese);
+                AlertDialog.Builder builder = new AlertDialog.Builder(DetailActivity.this, R.style.MyDialogTheme);
+                builder.setTitle("Choose subtitle language").setView(dialogview);
+                final AlertDialog dialog = builder.create();
+                txtEnglish.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+                txtVietnamese.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+                txtJapanese.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
             }
         });
         btnPlay = (ImageView) findViewById(R.id.btnPlay);
