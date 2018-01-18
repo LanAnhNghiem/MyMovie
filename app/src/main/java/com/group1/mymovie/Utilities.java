@@ -13,4 +13,5 @@ public class Utilities {
     public static int SMALL_WIDTH = (int)(SCREEN_WIDTH / 4);
     public static double GOLDEN_RATIO = 1.618;
     public static String YOUTUBE_API_KEY = "AIzaSyALnLC5LsLjLUke8oUPNkHohxev7rpKLns";
+    public static String SIGN_IN ="signin";
 }

@@ -14,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,18 @@ import android.widget.Toast;
 public class UserFragment extends Fragment{
     OnScrollingListener scrollingListener;
     CardView btnEditProfile, btnFavorites, btnSetting, btnSignOut;
+    ImageView imgAvatar;
+    TextView txtName, txtSignOut;
+    boolean isSignIn = false;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Intent intent = getActivity().getIntent();
+        if(intent.hasExtra(Utilities.SIGN_IN)){
+            isSignIn = intent.getBooleanExtra(Utilities.SIGN_IN, true);
+        }
+    }
 
     @Nullable
     @Override
@@ -34,6 +47,17 @@ public class UserFragment extends Fragment{
         btnFavorites = (CardView)view.findViewById(R.id.cvFavorite);
         btnSetting = (CardView)view.findViewById(R.id.cvSetting);
         btnSignOut = (CardView)view.findViewById(R.id.cvSignOut);
+        imgAvatar = view.findViewById(R.id.avatar);
+        txtName = view.findViewById(R.id.txtName);
+        txtSignOut = view.findViewById(R.id.txtSignOut);
+//        btnEditProfile.setCardBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorTransparent));
+        imgAvatar.setImageResource(R.drawable.default_landscape);
+        if(isSignIn){
+            onSignIn();
+        }
+        else{
+            onSignOut();
+        }
         btnEditProfile.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -82,6 +106,9 @@ public class UserFragment extends Fragment{
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                     btnSignOut.setCardBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorTransparent));
                     Toast.makeText(getActivity(), "Sign out successfully", Toast.LENGTH_SHORT).show();
+                    onSignOut();
+                    Intent intent = new Intent(getContext(), SignInActivity.class);
+                    getContext().startActivity(intent);
                     return true;
                 } else {
                     btnSignOut.setCardBackgroundColor(ContextCompat.getColor(getContext(),R.color.colorTrans));
@@ -90,6 +117,22 @@ public class UserFragment extends Fragment{
             }
         });
         return view;
+    }
+    public void onSignOut(){
+        imgAvatar.setImageResource(R.drawable.default_landscape);
+        txtName.setText("Username");
+        btnEditProfile.setEnabled(false);
+        btnSetting.setEnabled(false);
+        btnFavorites.setEnabled(false);
+        txtSignOut.setText("Sign In");
+    }
+    public void onSignIn(){
+        imgAvatar.setImageResource(R.drawable.user_neko);
+        txtName.setText("Lan Anh");
+        btnEditProfile.setEnabled(true);
+        btnSetting.setEnabled(true);
+        btnFavorites.setEnabled(true);
+        txtSignOut.setText("Sign Out");
     }
     @Override
     public void onAttach(Context context) {

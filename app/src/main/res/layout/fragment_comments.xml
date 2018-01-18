@@ -30,7 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_marginEnd="10dp"
-            android:src="@drawable/user_shiro"
+            android:src="@drawable/user_neko"
             app:layout_constraintEnd_toStartOf="@id/comment"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintHorizontal_weight="2"
@@ -49,20 +49,32 @@
             android:padding="5dp"
             android:text=""
             android:textColor="@color/colorWhite"
-            app:layout_constraintEnd_toStartOf="@id/btnSend"
+            app:layout_constraintEnd_toStartOf="@id/layout_send"
             app:layout_constraintHorizontal_weight="8"
             app:layout_constraintStart_toEndOf="@id/avatar_user" />
-
-        <ImageView
-            android:id="@+id/btnSend"
+        <FrameLayout
+            android:id="@+id/layout_send"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_weight="1"
-            android:src="@drawable/ic_send"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="1"
-            app:layout_constraintStart_toEndOf="@id/comment" />
+            app:layout_constraintStart_toEndOf="@id/comment"
+            android:foreground="@drawable/ripple_effect_btn"
+            android:clickable="true"
+            android:focusable="true"
+            android:paddingStart="3dp"
+            android:paddingEnd="3dp">
+            <ImageView
+                android:id="@+id/btnSend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_weight="1"
+                android:src="@drawable/ic_send"
+                android:background="@drawable/ripple_effect_textview"
+                />
+        </FrameLayout>
+
     </android.support.constraint.ConstraintLayout>
 
     <android.support.v7.widget.RecyclerView

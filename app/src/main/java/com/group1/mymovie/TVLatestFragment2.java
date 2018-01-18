@@ -24,7 +24,7 @@ public class TVLatestFragment2 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_tv_latest, container, false);
+        View view = inflater.inflate(R.layout.fragment_tv_latest2, container, false);
         rvShow = (RecyclerView) view.findViewById(R.id.rvShow);
         layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);

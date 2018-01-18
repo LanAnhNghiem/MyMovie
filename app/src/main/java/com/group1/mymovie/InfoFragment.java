@@ -82,11 +82,13 @@ public class InfoFragment extends Fragment {
                             cvFavorite.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorWhite));
                             Picasso.with(getContext()).load(R.drawable.ic_star_hover).into(imgFavorite);
                             isPressed =true;
+                            Toast.makeText(getContext(), "Added to Favorites", Toast.LENGTH_SHORT).show();
                         }
                         else{
                             cvFavorite.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.colorAccent));
                             Picasso.with(getContext()).load(R.drawable.ic_star).into(imgFavorite);
                             isPressed=false;
+                            Toast.makeText(getContext(), "Removed from Favorites", Toast.LENGTH_SHORT).show();
                         }
                         break;
                 }
